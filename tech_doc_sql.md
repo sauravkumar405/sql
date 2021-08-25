@@ -34,7 +34,7 @@ These SQL commands are mainly categorized into four categories as:
 - DML – Data Manipulation Language
 - DCL – Data Control Language
 
-1. **Data Definition Language (DDL) -** 
+1. **Data Definition Language (DDL) -**
 
     DDL or Data Definition Language actually consists of the SQL commands that can be used to define the database schema. It simply deals with descriptions of the database schema and is used to create and modify the structure of database objects in the database.
 
@@ -70,56 +70,190 @@ These SQL commands are mainly categorized into four categories as:
 
     >REVOKE-withdraw user’s access privileges given by using the GRANT command.
 
-## SQL Database
+## Basic Queries in SQL
 
-1. SQL CREATE Database
+Let us first look at a sample table in which we will apply our upcoming queries
 
-The SQL CREATE DATABASE statement is used by a developer to create a database.
+### **SELECT**
 
-```SQL
-    CREATE DATABASE database_name;  
-```
-
-2. DROP Database
-
-SQL DROP statement is used to delete or remove indexes from a table in the database.
-
-If you want to delete or drop an existing database in a SQL schema, you can use SQL DROP DATABASE
-
-Let's see the syntax of SQL DROP DATABASE:
+***
+SELECT statement in SQL is used to select data from the database. Select statement is the most frequently used key word in an SQL command. It selects datafrom a table and presents it in the form of a table itself.
 
 ```SQL
-    DROP DATABASE database_name;  
+SELECT column1, column2, ...
+FROM table_name; 
 ```
 
-3. SQL RENAME Database
+### **SELECT DISTICT**
 
-In some situations, database users and administrators want to change the name of the database for some technical reasons. So, the Rename Database statement in SQL is used to change the name of the existing database.
+***
 
-Sometimes, the Rename Database statement is used because the developers think that the original name is not more relevant to the data of the database, or they want to give a temporary name to that database.
-
-Syntax of Rename Database in SQL.
+SELECT DISTINCT is used to select distinct and unique data from the database. In basic SELECT statement we select the particular column data which we want to get as an output, and this column may contain some dublicate data but when we use the DISTINCT keyword we get only the distinct column attributes.
 
 ```SQL
-    ALTER DATABASE old_database_name MODIFY NAME = new_database_name;  
+SELECT DISTINCT column1, column2, ...
+FROM table_name; 
 ```
 
-4. SQL SELECT Database
+### **WHERE**
 
-Suppose database users and administrators want to perform some operations on tables, views, and indexes on the specific existing database in SQL. Firstly, they have to select the database on which they want to run the database queries.
+***
 
-Any database user and administrator can easily select the particular database from the current database server using the USE statement in SQL.
-
-Syntax of USE statement in SQL
+The WHERE clause in SQL used to filter out result from a database based on some condition given along with it. It is used along with the SELECT statement and is mentioned at the end of the SQL statement along with its condition.
 
 ```SQL
-    USE database_name;   
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition; 
 ```
 
-5. SQL Table 
+### **AND / OR /NOT**
 
-Table is a collection of data, organized in terms of rows and columns. In DBMS term, table is known as relation and row as tuple.
+***
 
-Table is the simple form of data storage. A table is also considered as a convenient representation of relations.
+AND and OR keywords are used to combine two or more conditions given in an SQL statement. AND keyword is used to combine two or more conditions and states that all the conditions should be true. OR keywords are used to state that any one of the given conditions needs to be true in a statement. Whereas NOT keyword is used to reverse the outcome of a condition.
 
-Let's see an example of an employee table:
+```SQL
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2 AND condition3 ...; 
+```
+
+```SQL
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2 OR condition3 ...; 
+```
+
+```SQL
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition; 
+```
+
+### **ORDER BY**
+
+***
+The ORDER BY clause in SQL is used to sort the result-set table in ascending or descending order as per specifies in the SQL statement. ORDER BY clause is written at the last of a SQL statement after the WHERE clause.
+
+```SQL
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC; 
+```
+
+### **INSERT INTO**
+
+***
+The INSERT INTO statement is used to insert new records in an existing table in a database. the INSERT INTO statements can be used in two forms.
+
+1. Specify both the column names and the values to be inserted:
+
+```SQL
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...); 
+```
+
+2. If you are adding values for all the columns of the table, you do not need to specify the column names in the SQL query. However, make sure the order of the values is in the same order as the columns in the table. Here, the INSERT INTO syntax would be as follows:
+
+```SQL
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...); 
+```
+
+### **UPDATE**
+
+***
+The UPDATE statement in SQL is used to update the data of an existing table in database. We can update single columns as well as multiple columns using UPDATE statement as per our requirement.
+
+```SQL
+UPDATE table_name SET column1 = value1, column2 = value2,... 
+WHERE condition;
+```
+
+### **DELETE**
+
+***
+
+DELETE statements are used to delete records from an existing table in a Database. We should be very careful while using the DELETE and DROP commands in SQL, because these are used to remove permanently a record or table from a database.
+
+
+```SQL
+DELETE FROM table_name WHERE condition; 
+```
+
+### **MIN() / MAX()**
+
+***
+MIN and MAX are aggregate functions used in SQL to filter out the maximum or minimum value from a column in a database table. These are very useful commands and also the most frequent one because it is used in carrying out many statistical data calculations. The MIN() function returns the smallest value of the selected column. The MAX() function returns the largest value of the selected column.
+
+```SQL
+SELECT MIN(column_name)
+FROM table_name
+WHERE condition; 
+```
+
+```SQL
+SELECT MAX(column_name)
+FROM table_name
+WHERE condition; 
+```
+
+### **COUNT / AVG / SUM**
+
+***
+There are some more aggregate functions in sql which are very useful and frequently used. Some of them are COUNT(), AVG() and SUM().
+
+- COUNT() - This function is used to count the number of records that corresponds to a column in other words it outputs the number of attributes specifies in a given column.
+
+- AVG() - This function is used to calculate the average of all the values present in a column.
+
+- SUM() - Sum function is used to calculate the total sum of values present in a column.
+
+The restriction for the SUM and AVG functions is that the value present in that column should be numeric.
+
+```SQL
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition; 
+```
+
+```SQL
+SELECT AVG(column_name)
+FROM table_name
+WHERE condition; 
+```
+
+```SQL
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition; 
+```
+
+### **LIKE**
+
+***
+The SQL LIKE operator is primarily used to match substrings and pattern present in a column. It is used along with WHERE clause.
+There are two wildcards often used in conjunction with the LIKE operator:
+
+- The percent sign (%) represents zero, one, or multiple characters
+
+- The underscore sign ( _ ) represents one, single character
+
+```SQL
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+```
+
+### **IN**
+
+***
+
+The sql IN operator is used in place of OR operator in cases where we have a big dataset and to filter out similar values from the table which is also present in dataset using the OR  operator will be very tedious and non-practical.
+
+```SQL
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2, ...); 
+```
